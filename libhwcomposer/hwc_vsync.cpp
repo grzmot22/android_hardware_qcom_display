@@ -19,7 +19,6 @@
  */
 
 #include <cutils/properties.h>
-#include <cutils/iosched_policy.h>
 #include <utils/Log.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -60,7 +59,6 @@ static void *vsync_loop(void *param)
     prctl(PR_SET_NAME, (unsigned long) &thread_name, 0, 0, 0);
     androidSetThreadPriority(0, HAL_PRIORITY_URGENT_DISPLAY +
                 android::PRIORITY_MORE_FAVORABLE);
-    android_set_rt_ioprio(0, 1);
 
     const int MAX_DATA = 64;
     static char vdata[MAX_DATA];
@@ -68,7 +66,6 @@ static void *vsync_loop(void *param)
     uint64_t cur_timestamp=0;
     ssize_t len = -1;
     int fd_timestamp = -1;
-    int ret = 0;
     bool fb1_vsync = false;
     bool logvsync = false;
 
