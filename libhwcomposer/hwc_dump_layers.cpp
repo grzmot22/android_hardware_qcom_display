@@ -328,7 +328,8 @@ void HwcDebug::dumpLayer(size_t layerIndex, hwc_layer_1_t hwLayers[])
                 break;
         }
         if (kUnknown_SkColorType != tempSkBmpColor) {
-            tempSkBmp->setInfo(SkImageInfo::Make(getWidth(hnd), getHeight(hnd), tempSkBmpColor, kUnknown_SkAlphaType), 0);
+                tempSkBmp->setInfo(SkImageInfo::Make(getWidth(hnd), getHeight(hnd),
+                        tempSkBmpColor, kUnknown_SkAlphaType), 0);
             tempSkBmp->setPixels((void*)hnd->base);
             bResult = SkImageEncoder::EncodeFile(dumpFilename,
                                     *tempSkBmp, SkImageEncoder::kPNG_Type, 100);
